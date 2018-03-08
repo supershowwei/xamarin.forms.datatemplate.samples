@@ -2,10 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DataTemplateApp"
+             xmlns:vm="clr-namespace:DataTemplateApp.ViewModels"
              x:Class="DataTemplateApp.MainPage">
+    
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel />
+    </ContentPage.BindingContext>
 
-	<Label Text="Welcome to Xamarin.Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CarDataTemplateSelector x:Key="CarDataTemplateSelector"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ListView ItemTemplate="{StaticResource CarDataTemplateSelector}"
+              ItemsSource="{Binding Cars}" />
+    <!--<ListView ItemTemplate="{StaticResource CarDataTemplate}"
+              ItemsSource="{Binding Cars}" />-->
 
 </ContentPage>
